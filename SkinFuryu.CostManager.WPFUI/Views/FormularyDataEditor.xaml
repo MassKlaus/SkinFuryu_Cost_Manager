@@ -1,0 +1,116 @@
+﻿<base:BasePage x:TypeArguments="viewModels:FormularyIngredientsManagerViewModel" x:Class="SkinFuryu.CostManager.WPFUI.Views.FormularyDataEditor"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SkinFuryu.CostManager.WPFUI.Views"
+      xmlns:base="clr-namespace:SkinFuryu.CostManager.WPFUI.Views.Base"
+      xmlns:viewModels="clr-namespace:SkinFuryu.CostManager.UIFront.ViewModels;assembly=SkinFuryu.CostManager.UIFront"
+      xmlns:converters="clr-namespace:SkinFuryu.CostManager.WPFUI.ValueConverters"
+      xmlns:validation="clr-namespace:SkinFuryu.CostManager.WPFUI.ValidationRules"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800">
+
+    <!-- General Container -->
+    <Grid d:Background="White">
+        <Grid.Resources>
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="{StaticResource SemiSmallFontSize}" />
+            </Style>
+        </Grid.Resources>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".5*"/>
+            <!-- Defining Column for Input Field-->
+            <ColumnDefinition Width="2*"/>
+
+            <!-- Defining Column for Material Selection-->
+            <ColumnDefinition Width=".5*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+
+            <!-- Defining Rows for input fields -->
+            <RowDefinition/>
+            <!-- Defining a Row for Creation Button-->
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Grid to that will hold inpout fields-->
+        <Grid Grid.Column="1" Margin="0 5 0 0" DataContext="{Binding Formula}">
+
+            <!-- Columns that will hold the input fields-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Rows that will hold the input fields-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <!-- Stack Panel to Hold the componentents -->
+            <StackPanel Grid.Column="0" Margin="0 0 10 0">
+                <!-- Input Field for Client -->
+                <Label Content="Client"/>
+                <TextBox Text="{Binding Client}"/>
+
+                <!-- Input Fields for Skin Type-->
+                <Label Content="Skin Type"/>
+                <TextBox Text="{Binding SkinType}"/>
+
+                <!-- Input Fields for Skin Type-->
+                <Label Content="Ph Level"/>
+                <TextBox>
+                    <TextBox.Text>
+                        <Binding Path="Ph" Converter="{converters:StringToDoubleConverter}">
+                            <Binding.ValidationRules>
+                                <validation:DoubleValidation/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+            </StackPanel>
+
+            <!-- Stack of labels and textboxes-->
+            <StackPanel Grid.Column="1" Margin="10 0 0 0">
+                <Label Content="Name"/>
+                <TextBox Text="{Binding Name}"/>
+
+                <Label Content="Texture"/>
+                <TextBox Text="{Binding Texture}"/>
+
+                <Label Content="Batch Size [ g ]"/>
+                <TextBox>
+                    <TextBox.Text>
+                        <Binding Path="BatchSize" Converter="{converters:StringToDoubleConverter}">
+                            <Binding.ValidationRules>
+                                <validation:DoubleValidation/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
+                <Label Content="Description"/>
+                <TextBox Text="{Binding Description}"/>
+            </StackPanel>
+
+            <Grid Grid.Row="2" Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Content="Procedure"/>
+                <TextBox Grid.Row="1" Text="{Binding Procedure}" Style="{StaticResource LargeTextBox}"/>
+            </Grid>
+        </Grid>
+
+        <Button Command="{Binding SaveFormularyDataCommand}" Grid.ColumnSpan="3" Grid.Row="1" VerticalAlignment="Center" Margin="20" HorizontalAlignment="Center" Content="Save"/>
+    </Grid>
+</base:BasePage>

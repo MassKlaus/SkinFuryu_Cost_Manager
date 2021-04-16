@@ -1,0 +1,94 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="ButtonFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border BorderThickness="1" CornerRadius="5" Margin="0" Padding="0" SnapsToDevicePixels="True" BorderBrush="{StaticResource VeryDarkPurpleBrush}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource BaseStyle}">
+        <Setter Property="Foreground" Value="{StaticResource PureBlackBrush}"/>
+        <Setter Property="FontSize" Value="{StaticResource NormalFontSize}"/>
+
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="20 10"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ButtonBase}">
+                    <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="5" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="true">
+                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation To="{StaticResource RegularPurple}" Duration="0:0:0.15" Storyboard.TargetName="border" Storyboard.TargetProperty="Background.Color"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation To="{StaticResource LightPurple}" Duration="0:0:0.15" Storyboard.TargetName="border" Storyboard.TargetProperty="Background.Color"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource DarkPurpleBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource DisabledBackgroundBrush}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource DisabledForegroundBrush}"/>
+                        </Trigger>
+                        
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SeemlessButton" TargetType="{x:Type Button}" BasedOn="{StaticResource BaseStyle}">
+        <Setter Property="Foreground" Value="{StaticResource PureBlackBrush}"/>
+        <Setter Property="FontSize" Value="{StaticResource NormalFontSize}"/>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="BorderThickness" Value="0"/>
+
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontSize" Value="{StaticResource SmallFontSize}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="5" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="true">
+                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource RegularPurpleBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource DarkPurpleBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource DisabledBackgroundBrush}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource DisabledForegroundBrush}"/>
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

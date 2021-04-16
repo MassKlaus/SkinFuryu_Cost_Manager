@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+
+<body>
+    <style>
+        div.Center{
+            padding: 0 50%;
+            position: relative;
+        }
+
+        img{
+            width: 300px;
+            text-align: center;
+            position: relative;
+            transform: translateX(-50%);
+        }
+        
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        table {
+            border: 1px black solid;
+            margin: 0 auto;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td {
+            border: solid black 1px;
+            width: 30%;
+            text-align: left;
+            padding-left: 8px;
+        }
+
+        th {
+            border: solid black 1px;
+            width: 20%;
+            text-align: center;
+            background-color: #B589D6;
+        }
+
+        .Phase {
+            width: 10%;
+        }
+
+        .Name {
+            width: 10%;
+        }
+
+        .InciName {
+            width: 10%;
+        }
+
+        .Description {
+            width: 40%;
+        }
+
+        .Percentage {
+            width: 5%;
+        }
+
+        .Cost {
+            width: 10%;
+        }
+
+        .Price {
+            width: 8%;
+        }
+
+        h2 {
+            font-size: 21px;
+            text-align: center;
+            text-decoration: underline;
+        }
+
+        h3 {
+            font-size: 21px;
+            text-align: center;
+        }
+
+        .titlebar {
+            font-size: 16px;
+            text-align: center;
+            margin: 0 auto;
+            border: black solid 1px;
+            background-color: #B589D6;
+            font-weight: bold;
+        }
+
+        div {
+            width: 90%;
+            margin: 30px auto;
+            box-sizing: border-box;
+        }
+
+        ul
+        {
+            list-style: decimal;
+        }
+
+        ul.None
+        {
+            list-style: none;
+        }
+    </style>
+
+    <div class="Center">
+        <img src="./Logo.png" alt="Logo">
+    </div>
+
+    <h3>Formulation Sheet</h3>
+
+    <div>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Name</th>
+                    <td>@Name</td>
+                    <th>Skin Type</th>
+                    <td>@SkinType</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>@Description</td>
+                    <th>Texture</th>
+                    <td>@Texture</td>
+                </tr>
+                <tr>
+                    <th>Batch Size</th>
+                    <td>@BatchSize</td>
+                    <th>Ph Level</th>
+                    <td>@Ph</td>
+                </tr>
+                <tr>
+                    <th>Client</th>
+                    <td>@Client</td>
+                    <th>Packaging Size</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>MFG Date</th>
+                    <td></td>
+                    <th>Retail Price</th>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th class="Phase">Phase</th>
+                    <th class="InciName">Ingredient</th>
+                    <th class="Name">Ingredient</th>
+                    <th class="Description">Description</th>
+                    <th class="Percentage">%</th>
+                    <th class="Price">Price / g</th>
+                    <th class="Cost">Cost</th>
+                </tr>
+            </thead>
+            <tbody>
+                @IngredientTable
+            </tbody>
+        </table>
+    </div>
+
+    <div class="titlebar">
+        Formulation Procedure
+    </div>
+
+    <div>
+        <ul>
+            @Procedure
+        </ul>
+    </div>
+
+    <div>
+        <h2>@Name</h2>
+    </div>
+
+    <div class="titlebar">
+        Ingredients
+    </div>
+
+    <div>
+        <ul class="None">
+            @Ingredients
+        </ul>
+    </div>
+</body>
+
+</html>

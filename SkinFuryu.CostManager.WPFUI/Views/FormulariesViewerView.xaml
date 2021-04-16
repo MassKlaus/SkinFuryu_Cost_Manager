@@ -1,0 +1,77 @@
+﻿<base:BasePage x:TypeArguments="viewModels:FormulariesViewerViewModel" x:Class="SkinFuryu.CostManager.WPFUI.Views.FormulariesViewerView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SkinFuryu.CostManager.WPFUI.Views"
+      xmlns:base="clr-namespace:SkinFuryu.CostManager.WPFUI.Views.Base"
+            xmlns:viewModels="clr-namespace:SkinFuryu.CostManager.UIFront.ViewModels;assembly=SkinFuryu.CostManager.UIFront"
+      xmlns:converters="clr-namespace:SkinFuryu.CostManager.WPFUI.ValueConverters"
+      xmlns:validation="clr-namespace:SkinFuryu.CostManager.WPFUI.ValidationRules"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid>
+        <DataGrid ItemsSource="{Binding Formularies}" SelectedItem="{Binding Formula}">
+            <DataGrid.Resources>
+                <Style TargetType="Button" BasedOn="{StaticResource SeemlessButton}"/>
+                <Style TargetType="DataGridCell" BasedOn="{StaticResource PaddedCell}"/>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Client" Binding="{Binding Client}" Width="auto"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="auto"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*" CanUserResize="True"/>
+                <DataGridTextColumn Header="Ph" Width="auto">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="Ph">
+                            <Binding.ValidationRules>
+                                <validation:DoubleValidation ValidatesOnTargetUpdated="True"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Size [ g ]" Width="auto">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="BatchSize">
+                            <Binding.ValidationRules>
+                                <validation:DoubleValidation ValidatesOnTargetUpdated="True"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Cost" Width="auto" IsReadOnly="True">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="Cost" Converter="{converters:DecimalToMoneyConverter}" ConverterCulture="en-PH">
+                            <Binding.ValidationRules>
+                                <validation:DecimalValidation ValidatesOnTargetUpdated="True"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Price" Width="auto" IsReadOnly="True">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="Price" Converter="{converters:DecimalToMoneyConverter}" ConverterCulture="en-PH">
+                            <Binding.ValidationRules>
+                                <validation:DecimalValidation ValidatesOnTargetUpdated="True"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTemplateColumn Width="auto" CellStyle="{StaticResource BasicCell}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Open" Padding="20 10" Command="{Binding Open}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="auto" CellStyle="{StaticResource BasicCell}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Print" Padding="20 10" Command="{Binding Print}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</base:BasePage>

@@ -1,0 +1,51 @@
+﻿<base:BasePage x:TypeArguments="viewModel:FormularyIngredientsManagerViewModel" x:Class="SkinFuryu.CostManager.WPFUI.Views.FormularyIngredientsManagerView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SkinFuryu.CostManager.WPFUI.Views"
+      xmlns:base="clr-namespace:SkinFuryu.CostManager.WPFUI.Views.Base"
+      xmlns:validation="clr-namespace:SkinFuryu.CostManager.WPFUI.ValidationRules"
+      xmlns:converters="clr-namespace:SkinFuryu.CostManager.WPFUI.ValueConverters"
+      xmlns:viewModel="clr-namespace:SkinFuryu.CostManager.UIFront.ViewModels;assembly=SkinFuryu.CostManager.UIFront"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid d:Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid ItemsSource="{Binding Ingredients}">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridCell" BasedOn="{StaticResource PaddedCell}"/>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Phase" Binding="{Binding Phase}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Description" Width="*" Binding="{Binding Description}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Percentage [ % ]" Binding="{Binding Percentage, Converter={converters:DoubleToPercentageConverter}}"/>
+                <DataGridTextColumn Header="Quantity [ g ]" Binding="{Binding Quantity}" IsReadOnly="True" MinWidth="80"/>
+                <DataGridTextColumn Header="Cost" Binding="{Binding Cost, Converter={converters:DecimalToMoneyConverter}, ConverterCulture=en-Ph}" IsReadOnly="True" MinWidth="80"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Margin="10" Grid.Column="1">
+            <Label Content="Phase"/>
+            <TextBox Text="{Binding Phase}"/>
+            <Label Content="Material"/>
+            <ComboBox ItemsSource="{Binding Materials}" SelectedValue="{Binding Material}" DisplayMemberPath="Name" IsReadOnly="True"/>
+            <Label Content="Percentage"/>
+            <TextBox>
+                <TextBox.Text>
+                    <Binding Path="Percentage" Converter="{converters:DoubleToPercentageConverter}">
+                        <Binding.ValidationRules>
+                            <validation:DoubleValidation ValidatesOnTargetUpdated="True"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <Button Content="Create" Command="{Binding CreateIngredientCommand}" HorizontalAlignment="Center" Margin="0 20"/>
+        </StackPanel>
+    </Grid>
+</base:BasePage>

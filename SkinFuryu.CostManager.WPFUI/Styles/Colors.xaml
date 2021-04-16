@@ -1,0 +1,33 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="White">#fff</Color>
+    <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}"/>
+
+    <Color x:Key="GrayBorder">#707070</Color>
+    <SolidColorBrush x:Key="GrayBorderBrush" Color="{StaticResource GrayBorder}"/>
+
+    <Color x:Key="PureBlack">#000</Color>
+    <SolidColorBrush x:Key="PureBlackBrush" Color="{StaticResource PureBlack}"/>
+
+    <Color x:Key="VeryDarkPurple">#8E33FF</Color>
+    <SolidColorBrush x:Key="VeryDarkPurpleBrush" Color="{StaticResource VeryDarkPurple}"/>
+
+    <Color x:Key="DarkPurple">#B584F2</Color>
+    <SolidColorBrush x:Key="DarkPurpleBrush" Color="{StaticResource DarkPurple}"/>
+
+    <Color x:Key="RegularPurple">#CCA3FF</Color>
+    <SolidColorBrush x:Key="RegularPurpleBrush" Color="{StaticResource RegularPurple}"/>
+
+    <Color x:Key="SemiLightPurple">#d8baff</Color>
+    <SolidColorBrush x:Key="SemiLightPurpleBrush" Color="{StaticResource SemiLightPurple}"/>
+    
+    <Color x:Key="LightPurple">#E5D0FF</Color>
+    <SolidColorBrush x:Key="LightPurpleBrush" Color="{StaticResource LightPurple}"/>
+
+    <Color x:Key="DisabledBackground">#FFF4F4F4</Color>
+    <SolidColorBrush x:Key="DisabledBackgroundBrush" Color="{StaticResource DisabledBackground}"/>
+
+    <Color x:Key="DisabledForeground">#FF838383</Color>
+    <SolidColorBrush x:Key="DisabledForegroundBrush" Color="{StaticResource DisabledForeground}"/>
+</ResourceDictionary>

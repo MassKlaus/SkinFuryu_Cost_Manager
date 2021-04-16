@@ -1,0 +1,29 @@
+﻿<Window x:Class="SkinFuryu.CostManager.WPFUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SkinFuryu.CostManager.WPFUI"
+        xmlns:attached="clr-namespace:SkinFuryu.CostManager.WPFUI.AttachedProperties"
+        xmlns:converters="clr-namespace:SkinFuryu.CostManager.WPFUI.ValueConverters"
+        xmlns:UIViewModels="clr-namespace:SkinFuryu.CostManager.WPFUI.ViewModels"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow"
+        Height="550"
+        Width="900">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" Visibility="{Binding ApplicationViewModel.NavigationMenuVisible, Source={x:Static UIViewModels:ViewModelLocator.Instance}, Converter={converters:BooleanToVisibilityConverter}}">
+            <MenuItem Header="Panels">
+                <MenuItem Header="Forumlary Creaction" Command="{Binding OpenFormulariesView}"/>
+                <MenuItem Header="Formularies" Command="{Binding OpenFormularies}"/>
+                <MenuItem Header="Materials" Command="{Binding OpenMaterials}"/>
+            </MenuItem>
+            <MenuItem Header="Tabs" Visibility="{Binding ApplicationViewModel.TabsNavigationVisible, Source={x:Static UIViewModels:ViewModelLocator.Instance}, Converter={converters:BooleanToVisibilityConverter}}">
+                <MenuItem Header="Ingredients" Command="{Binding OpenFormularyIngredients}"/>
+                <MenuItem Header="Formula Data" Command="{Binding OpenFormularyData}"/>
+            </MenuItem>
+        </Menu>
+        <Frame Content="{Binding ApplicationViewModel.CurrentPage, Source={x:Static UIViewModels:ViewModelLocator.Instance}, Converter={converters:PageEnumToPageConverter}}" attached:NoFrameHistory.Value="True"/>
+    </DockPanel>
+</Window>
