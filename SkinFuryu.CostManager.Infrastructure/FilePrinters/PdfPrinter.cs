@@ -26,8 +26,11 @@ namespace SkinFuryu.CostManager.Infrastructure.FilePrinters
 
             HtmlToPdf pdfMaker = new();
             var doc = pdfMaker.ConvertHtmlString(completedTemplate, baseFolder);
-            doc.Save($"../PDF/{formulaReport.Name}-Formula_Report.pdf");
+            var completedPath = $"../PDF/{formulaReport.Name}-Formula_Report.pdf";
+            doc.Save(completedPath);
             doc.Close();
+
+            System.Diagnostics.Process.Start("explorer", Path.GetFullPath(completedPath));
         }
 
         private string BuildTemplate(string template, FormulaReport formulaReport)
